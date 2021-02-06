@@ -3,18 +3,24 @@
 console.log('App.js is running!');
 
 // JSX - JavaScript XML
+var app = {
+    title: 'Indecision App',
+    subtitle: 'Some Cool Info'
+};
+
 var template = React.createElement(
     'div',
     null,
     React.createElement(
         'h1',
         null,
-        'Indecision App '
+        app.title,
+        ' '
     ),
     React.createElement(
         'p',
         null,
-        'This is some info'
+        app.subtitle
     ),
     React.createElement(
         'ol',
@@ -32,20 +38,28 @@ var template = React.createElement(
     )
 );
 
+var userName = 'StreetLevelCode';
+var locationName = 'Oakland';
+
+var user = {
+    name: 'Brian Alegria',
+    location: 'StreetLevelCode'
+};
+// you can have any kind of js expression withing the brackets
 var second_template = React.createElement(
     'div',
     null,
     React.createElement(
         'h1',
         null,
-        'Brian Alegria'
+        user.name + '!'
     ),
     React.createElement(
         'p',
         null,
-        'Oakland California'
+        user.location
     )
 );
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(second_template, appRoot);
+ReactDOM.render(template, appRoot);

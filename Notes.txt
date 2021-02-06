@@ -1,1 +1,6 @@
 Babel requires one root element
+
+
+JSX:
+
+you can have any kind of js expression withing the brackets
