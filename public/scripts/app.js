@@ -5,8 +5,20 @@ console.log('App.js is running!');
 // JSX - JavaScript XML
 var app = {
     title: 'Indecision App',
-    subtitle: 'Some Cool Info'
+    subtitle: 'Some Cool Infos',
+    options: ['One', 'Two']
 };
+
+function getSubtitle(subtitle) {
+    if (subtitle) {
+        return React.createElement(
+            'p',
+            null,
+            'Subtitle: ',
+            app.subtitle
+        );
+    }
+}
 
 var template = React.createElement(
     'div',
@@ -17,10 +29,11 @@ var template = React.createElement(
         app.title,
         ' '
     ),
+    getSubtitle(app.subtitle),
     React.createElement(
         'p',
         null,
-        app.subtitle
+        app.options.length > 0 ? 'your options: something ' : 'no options available'
     ),
     React.createElement(
         'ol',
@@ -29,6 +42,11 @@ var template = React.createElement(
             'li',
             null,
             'Item one'
+        ),
+        React.createElement(
+            'li',
+            null,
+            'Item two'
         ),
         React.createElement(
             'li',
@@ -43,8 +61,21 @@ var locationName = 'Oakland';
 
 var user = {
     name: 'Brian Alegria',
-    location: 'StreetLevelCode'
+    location: 'StreetLevelCode',
+    age: 26
 };
+
+function getLocation(location) {
+    if (location) {
+        return React.createElement(
+            'p',
+            null,
+            'Location: ',
+            user.location
+        );
+    }
+}
+
 // you can have any kind of js expression withing the brackets
 var second_template = React.createElement(
     'div',
@@ -52,13 +83,16 @@ var second_template = React.createElement(
     React.createElement(
         'h1',
         null,
-        user.name + '!'
+        'User: ',
+        user.name ? user.name : 'No user'
     ),
-    React.createElement(
+    user.age && user.age >= 18 && React.createElement(
         'p',
         null,
-        user.location
-    )
+        'Age: ',
+        user.age
+    ),
+    getLocation(user.location)
 );
 var appRoot = document.getElementById('app');
 

@@ -1,6 +1,8 @@
 Babel requires one root element
 
 
-JSX:
+JSX: JavaScript XML
+It allows us to write HTML in React
+Making it much easier
 
 you can have any kind of js expression withing the brackets
