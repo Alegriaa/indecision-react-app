@@ -5,7 +5,7 @@ console.log('App.js is running!');
 // JSX - JavaScript XML
 var app = {
     title: 'Indecision App',
-    subtitle: 'Some Cool Infos',
+    subtitle: 'Some super Cool Infos',
     options: ['One', 'Two']
 };
 
@@ -96,4 +96,4 @@ var second_template = React.createElement(
 );
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+ReactDOM.render(second_template, appRoot);
