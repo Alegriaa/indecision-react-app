@@ -26,30 +26,59 @@ const template = (
     </ol>
 </div>);
 
-const userName = 'StreetLevelCode';
-const locationName = 'Oakland';
+let count = 0;
 
-const user = {
-    name: 'Brian Alegria',
-    location: 'StreetLevelCode',
-    age: 26
+// reference this function
+const addOne = () => {
+    console.log("button clicked")
 };
 
-function getLocation(location) {
-    if (location) {
-        return <p>Location: {user.location}</p>;
-    }
-}
+const minusOne = () => {
+    console.log("minus one button clicked")
+};
 
-// you can have any kind of js expression withing the brackets
-const second_template = (
+const reset = () => {
+    console.log("reset button clicked")
+};
+
+
+
+// JSX uses parenthesis
+const templateTwo = (
     <div>
-        <h1>User: {user.name ? user.name : 'No user'}</h1>
-        {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
-        {getLocation(user.location)}
+    <h1>Count: {count} </h1>
+    <button onClick = {addOne}> + 1</button>
+    <button onClick = {minusOne}>-1</button>
+    <button onClick = {reset}>reset</button>
     </div>
 
 );
+
+console.log(templateTwo);
+// const userName = 'StreetLevelCode';
+// const locationName = 'Oakland';
+
+// const user = {
+//     name: 'Brian Alegria',
+//     location: 'StreetLevelCode',
+//     age: 26
+// };
+
+// function getLocation(location) {
+//     if (location) {
+//         return <p>Location: {user.location}</p>;
+//     }
+// }
+
+// // you can have any kind of js expression withing the brackets
+// const second_template = (
+//     <div>
+//         <h1>User: {user.name ? user.name : 'No user'}</h1>
+//         {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
+//         {getLocation(user.location)}
+//     </div>
+
+// );
 const appRoot = document.getElementById('app');
 
-ReactDOM.render(second_template, appRoot);
+ReactDOM.render(templateTwo, appRoot);
