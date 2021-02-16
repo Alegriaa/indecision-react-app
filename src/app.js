@@ -1,3 +1,5 @@
+
+
 console.log('App.js is running!');
 
 
@@ -30,31 +32,47 @@ let count = 0;
 
 // reference this function
 const addOne = () => {
+    count++;
     console.log("button clicked")
+    renderCounterApp();
+
 };
 
 const minusOne = () => {
+    count--;
     console.log("minus one button clicked")
+    renderCounterApp();
 };
 
 const reset = () => {
+    count = 0;
     console.log("reset button clicked")
+    renderCounterApp();
 };
 
 
+const appRoot = document.getElementById('app');
 
+
+
+const renderCounterApp = () => {
 // JSX uses parenthesis
 const templateTwo = (
     <div>
     <h1>Count: {count} </h1>
     <button onClick = {addOne}> + 1</button>
     <button onClick = {minusOne}>-1</button>
-    <button onClick = {reset}>reset</button>
+    <button onClick = {reset} >reset</button>
     </div>
 
 );
 
-console.log(templateTwo);
+ReactDOM.render(templateTwo, appRoot);
+};
+renderCounterApp();
+
+
+// console.log(templateTwo);
 // const userName = 'StreetLevelCode';
 // const locationName = 'Oakland';
 
@@ -79,6 +97,4 @@ console.log(templateTwo);
 //     </div>
 
 // );
-const appRoot = document.getElementById('app');
 
-ReactDOM.render(templateTwo, appRoot);
