@@ -6,3 +6,7 @@ It allows us to write HTML in React
 Making it much easier
 
 you can have any kind of js expression withing the brackets
+
+
+
+React uses virtual DOM algorithms in JS to identify the needed changes during the rerendering process. making this very efficient behind the scenes.
