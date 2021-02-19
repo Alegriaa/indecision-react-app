@@ -3,10 +3,14 @@
 console.log('App.js is running!');
 
 // JSX - JavaScript XML
+// works with arrays, integers
+// not with objects. ignores booleans. 
+
+
 var app = {
     title: 'Indecision App',
     subtitle: 'Some super Cool Infos',
-    options: ['One', 'Two']
+    options: []
 };
 
 function getSubtitle(subtitle) {
@@ -20,97 +24,92 @@ function getSubtitle(subtitle) {
     }
 }
 
-var template = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        app.title,
-        ' '
-    ),
-    getSubtitle(app.subtitle),
-    React.createElement(
-        'p',
-        null,
-        app.options.length > 0 ? 'your options: something ' : 'no options available'
-    ),
-    React.createElement(
-        'ol',
-        null,
-        React.createElement(
-            'li',
-            null,
-            'Item one'
-        ),
-        React.createElement(
-            'li',
-            null,
-            'Item two'
-        ),
-        React.createElement(
-            'li',
-            null,
-            'Item two'
-        )
-    )
-);
+var onFormSubmit = function onFormSubmit(e) {
+    // stops full page refresh
+    e.preventDefault();
+    // points to the element 
+    var option = e.target.elements.option.value;
 
-var count = 0;
+    if (option) {
+        // adds this option to array
+        app.options.push(option);
+        e.target.elements.option.value = '';
+        // render function
+        renderSubmission();
+    }
 
-// reference this function
-var addOne = function addOne() {
-    count++;
-    console.log("button clicked");
-    renderCounterApp();
+    console.log("form submitted");
 };
 
-var minusOne = function minusOne() {
-    count--;
-    console.log("minus one button clicked");
-    renderCounterApp();
-};
-
+// creating remove all button
+// on click -> wipe the array -> rerender
 var reset = function reset() {
-    count = 0;
+    // or app.options = [];
+    app.options.length = 0;
     console.log("reset button clicked");
-    renderCounterApp();
+    renderSubmission();
 };
 
 var appRoot = document.getElementById('app');
 
-var renderCounterApp = function renderCounterApp() {
-    // JSX uses parenthesis
-    var templateTwo = React.createElement(
+// const numbers = [55, 101, 1000];
+// map lets us take an aray and convert it in some way
+
+
+//onSubmit event handler to reference a function once the form is submitted
+var renderSubmission = function renderSubmission() {
+    var template = React.createElement(
         'div',
         null,
         React.createElement(
             'h1',
             null,
-            'Count: ',
-            count,
+            app.title,
             ' '
         ),
+        getSubtitle(app.subtitle),
         React.createElement(
-            'button',
-            { onClick: addOne },
-            ' + 1'
+            'p',
+            null,
+            app.options.length > 0 ? 'your options: something ' : 'no options available'
         ),
         React.createElement(
-            'button',
-            { onClick: minusOne },
-            '-1'
+            'p',
+            null,
+            app.options.length
         ),
         React.createElement(
             'button',
             { onClick: reset },
-            'reset'
+            'Remove All'
+        ),
+        React.createElement(
+            'ol',
+            null,
+
+            /* or    app.options.map((option) => <li key = {option}>{option}</li>*/
+            app.options.map(function (option) {
+                return React.createElement(
+                    'li',
+                    { key: option },
+                    option
+                );
+            })
+        ),
+        React.createElement(
+            'form',
+            { onSubmit: onFormSubmit },
+            React.createElement('input', { type: 'text', name: 'option' }),
+            React.createElement(
+                'button',
+                null,
+                'Add Option'
+            )
         )
     );
-
-    ReactDOM.render(templateTwo, appRoot);
+    ReactDOM.render(template, appRoot);
 };
-renderCounterApp();
+renderSubmission();
 
 // console.log(templateTwo);
 // const userName = 'StreetLevelCode';
