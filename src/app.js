@@ -4,10 +4,14 @@ console.log('App.js is running!');
 
 
 // JSX - JavaScript XML
+// works with arrays, integers
+// not with objects. ignores booleans. 
+
+
 const app = {
     title: 'Indecision App',
     subtitle: 'Some super Cool Infos',
-    options: ['One', 'Two']
+    options: []
 };
 
 function getSubtitle (subtitle){
@@ -16,60 +20,77 @@ function getSubtitle (subtitle){
  }
 }
 
-const template = (
-<div>
-    <h1>{app.title} </h1>
-    {getSubtitle(app.subtitle)}
-    <p>{app.options.length > 0 ? 'your options: something ' : 'no options available'}</p>
-    <ol>
-        <li>Item one</li>
-        <li>Item two</li>
-        <li>Item two</li>
-    </ol>
-</div>);
+const onFormSubmit = (e) => {
+    // stops full page refresh
+    e.preventDefault();
+    // points to the element 
+    const option = e.target.elements.option.value;
 
-let count = 0;
+    if (option){
+        // adds this option to array
+        app.options.push(option);
+        e.target.elements.option.value = '';
+        // render function
+        renderSubmission();
 
-// reference this function
-const addOne = () => {
-    count++;
-    console.log("button clicked")
-    renderCounterApp();
 
+    }
+
+    console.log("form submitted")
 };
 
-const minusOne = () => {
-    count--;
-    console.log("minus one button clicked")
-    renderCounterApp();
-};
-
+// creating remove all button
+// on click -> wipe the array -> rerender
 const reset = () => {
-    count = 0;
+    // or app.options = [];
+    app.options.length = 0;
     console.log("reset button clicked")
-    renderCounterApp();
+   renderSubmission();
 };
+
+
 
 
 const appRoot = document.getElementById('app');
 
+// const numbers = [55, 101, 1000];
+// map lets us take an aray and convert it in some way
 
 
-const renderCounterApp = () => {
-// JSX uses parenthesis
-const templateTwo = (
-    <div>
-    <h1>Count: {count} </h1>
-    <button onClick = {addOne}> + 1</button>
-    <button onClick = {minusOne}>-1</button>
-    <button onClick = {reset} >reset</button>
-    </div>
 
-);
 
-ReactDOM.render(templateTwo, appRoot);
+//onSubmit event handler to reference a function once the form is submitted
+const renderSubmission = () => {
+    const template = (
+        <div>
+            <h1>{app.title} </h1>
+            {getSubtitle(app.subtitle)}
+            <p>{app.options.length > 0 ? 'your options: something ' : 'no options available'}</p>
+            <p>{app.options.length}</p>
+            <button onClick = {reset} >Remove All</button>
+            {
+                // numbers.map((num) => {
+                //     return <p key = {num}>Number: {num}</p>
+                // })
+            }
+            <ol>
+               {/* mapping over app.options getting back an array of list items (lis), set key and text */}
+               {
+                   /* or    app.options.map((option) => <li key = {option}>{option}</li>*/
+                   app.options.map((option) => {
+                       return <li key = {option}>{option}</li>
+                   })
+               }
+            </ol>
+            <form onSubmit = {onFormSubmit}>
+            <input type ="text" name="option"></input>
+            <button>Add Option</button>
+            </form>
+        </div>);
+        ReactDOM.render(template, appRoot)
 };
-renderCounterApp();
+renderSubmission();
+
 
 
 // console.log(templateTwo);
