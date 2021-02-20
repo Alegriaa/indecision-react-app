@@ -47,6 +47,12 @@ const reset = () => {
     console.log("reset button clicked")
    renderSubmission();
 };
+const onMakeDecision = () => {
+    const randomNum = Math.floor(Math.random() * app.options.length);
+    const option = app.options[randomNum];
+    alert(option);
+    console.log(randomNum);
+};
 
 
 
@@ -67,6 +73,7 @@ const renderSubmission = () => {
             {getSubtitle(app.subtitle)}
             <p>{app.options.length > 0 ? 'your options: something ' : 'no options available'}</p>
             <p>{app.options.length}</p>
+            <button disabled = {app.options.length == 0} onClick = {onMakeDecision}>What Should I Do.?</button>
             <button onClick = {reset} >Remove All</button>
             {
                 // numbers.map((num) => {

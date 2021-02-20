@@ -49,6 +49,12 @@ var reset = function reset() {
     console.log("reset button clicked");
     renderSubmission();
 };
+var onMakeDecision = function onMakeDecision() {
+    var randomNum = Math.floor(Math.random() * app.options.length);
+    var option = app.options[randomNum];
+    alert(option);
+    console.log(randomNum);
+};
 
 var appRoot = document.getElementById('app');
 
@@ -77,6 +83,11 @@ var renderSubmission = function renderSubmission() {
             'p',
             null,
             app.options.length
+        ),
+        React.createElement(
+            'button',
+            { disabled: app.options.length == 0, onClick: onMakeDecision },
+            'What Should I Do.?'
         ),
         React.createElement(
             'button',
