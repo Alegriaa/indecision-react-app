@@ -2,11 +2,29 @@
 // extend to give us the features from React
 // with React components you most define render()
 // uppercase first letter is how React differentiates a html element and a react component 
+// passing data when we init a component, that data is called props
+class IndecisionApp extends React.Component {
+    render () {
+        const title = 'Indecision';
+        const subtitle = "Your life in a computers hands";
+        const options = ["Item One", "Item Two", "Item three"]
+        return (
+            <div>
+            <Header title = {title} subtitle = {subtitle}/>
+            <Action />
+            <Options options = {options}/>
+            <AddOption />
+            </div>
+        );
+    }
+}
+
+
 class Header extends React.Component {
     render() {
        return (<div> 
-       <h1>Indecision</h1>
-       <h2>Your life in the hands of a computer</h2>
+       <h1>{this.props.title}</h1>
+       <h2>{this.props.subtitle}</h2>
        
        </div>
        );
@@ -19,23 +37,11 @@ class Action extends React.Component {
         return (
             <div>
             <button> What Should I Do ?</button>
-            
             </div>
         );
     }
 }
 
-// Options class
-class Options extends React.Component {
-    render() {
-        return (
-            <div>
-            <p> Options component here</p>
-
-            </div>
-        );
-    }
-}
 
 // addOption 
 class AddOption extends React.Component {
@@ -48,18 +54,30 @@ class AddOption extends React.Component {
     }
 }
 
-const jsx = (
-    <div>
-    <h1> Title </h1>
+class Options extends React.Component {
+    render() {
+        return (
+            <div>
+            {
+                this.props.options.map((option) => <Option key ={option} optionText ={option} />)
+            }
+           <Option />
 
-    <Header />
-    <Action />
-    <Options />
-    <AddOption />
-    
-    </div>
+            </div>
+        );
+    }
+}
 
-);
+class Option extends React.Component {
+    render () {
+        return (
+            <div>
+            {this.props.optionText}
+            </div>
+        );
+    }
+}
 
 
-ReactDOM.render(jsx, document.getElementById('app'));
+
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
