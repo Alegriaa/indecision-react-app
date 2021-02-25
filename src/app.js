@@ -1,4 +1,20 @@
 
+const obj = {
+    name: "Vikam",
+    getName() {
+
+        return this.name;
+        
+
+    }
+};
+// use bind(); methods on functions to bind 'this' 
+// bind the object 
+const getName = obj.getName.bind(obj);
+console.log(obj.getName());
+
+
+
 // extend to give us the features from React
 // with React components you most define render()
 // uppercase first letter is how React differentiates a html element and a react component 
@@ -70,14 +86,22 @@ class AddOption extends React.Component {
 }
 
 class Options extends React.Component {
-    removeAll(){
+    // basic override of constructor for react components 
+    constructor(props) {
+        super(props);
+        // wherever we call hanleRemoveAll(); the context is correct
+        this.handleRemoveAll = this.handleRemoveAll.bind(this);
+
+    }
+    handleRemoveAll(){
         alert("removeall")
     }
 
     render() {
+        
         return (
             <div>
-            <button onClick = {this.removeAll}>Remove All</button>
+            <button onClick = {this.handleRemoveAll}>Remove All</button>
             {
                 this.props.options.map((option) => <Option key ={option} optionText ={option} />)
             }
