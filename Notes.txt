@@ -12,3 +12,16 @@ you can have any kind of js expression withing the brackets
 React uses virtual DOM algorithms in JS to identify the needed changes during the rerendering process. making this very efficient behind the scenes.
 
 React - component based architecture 
+
+Props vs State 
+
+Prop:
+an object. can be used when rendering. changes (from above) cause re-renders
+come from above
+cant be changed by component itself
+
+
+State:
+an object, can be used when rendering. changes cause re-renders.
+defined within the component itself
+can be changed by the component itself
