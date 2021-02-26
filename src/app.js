@@ -25,6 +25,8 @@ class IndecisionApp extends React.Component {
         // binding the handles to this component instance
         this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
         this.handlePick = this.handlePick.bind(this);
+        this.handleAddOption =this.handleAddOption.bind(this);
+
         this.state = {
             options: ["Item One", "Item Two", "Item Three!"]
         };
@@ -44,6 +46,22 @@ class IndecisionApp extends React.Component {
         alert(option);
     }
 
+    handleAddOption(option) {
+        // for a empty array
+        if(!option){
+            return 'Please Enter a Valid Value';
+            // indexOf to see if we already have this option in the array
+        } else if (this.state.options.indexOf(option) > -1){
+            return "This option already exists"
+        }
+        this.setState((prevState) => {
+            return {
+                options: prevState.options.concat(option)
+            };
+        });
+    }
+        
+
 
     render () {
         const title = 'Indecision';
@@ -62,7 +80,11 @@ class IndecisionApp extends React.Component {
             handleDeleteOptions = {this.handleDeleteOptions}
             
             />
-            <AddOption />
+            <AddOption 
+            // pass this props
+            handleAddOption={this.handleAddOption}
+            
+            />
             </div>
         );
     }
@@ -101,23 +123,38 @@ class Action extends React.Component {
 
 // addOption 
 class AddOption extends React.Component {
+    constructor(props){
+        super(props);
+        this.handleAddOption = this.handleAddOption.bind(this);
+        this.state = {
+            error: undefined
+        };
+    }
+    // some validation
     handleAddOption(e) {
+
         e.preventDefault();
+        // use trim() to clean up any whitespace
+        const option = e.target.elements.option.value.trim();
+        const error = this.props.handleAddOption(option);
+        // state for component
 
-        const option = e.target.elements.option.value.trim;
-        if(option){
-            alert(option);
-        }
-
+        this.setState(() => {
+            return {
+                // indentical object short hand syntax for ES6
+                error
+            };
+        });
     }
     render(){
         return (
-            <div>
+        <div>
+            {this.state.error && <p>{this.state.error}</p>}
            <form onSubmit = {this.handleAddOption}>
            <input type="text" name="option" />
            <button>Add Option</button>
            </form>
-            </div>
+        </div>
         );
     }
 }
