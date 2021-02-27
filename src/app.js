@@ -32,7 +32,7 @@ class IndecisionApp extends React.Component {
         this.handleAddOption =this.handleAddOption.bind(this);
 
         this.state = {
-            options: ["Item One", "Item Two", "Item Three!"]
+            options: props.options
         };
     }
     handleDeleteOptions() {
@@ -68,12 +68,12 @@ class IndecisionApp extends React.Component {
 
 
     render () {
-        const title = 'Indecision';
+    
         const subtitle = "Your life in a computers hands";
         // const options = ["Item One", "Item Two", "Item three"]
         return (
             <div>
-            <Header title = {title} subtitle = {subtitle}/>
+            <Header subtitle = {subtitle}/>
             <Action 
             hasOptions = {this.state.options.length > 0 }
             // passing function down as a prop
@@ -94,14 +94,24 @@ class IndecisionApp extends React.Component {
     }
 }
 
+IndecisionApp.defaultProps = {
+    options: []
+
+};
+
+
 const Header = (props) => {
     return (
         <div> 
             <h1>{props.title}</h1>
-            <h2>{props.subtitle}</h2>
+           {props.subtitle && <h2>{props.subtitle}</h2>}
        </div>
 
     );
+};
+
+Header.defaultProps = {
+    title: 'Indecision'
 
 };
 
@@ -272,4 +282,4 @@ const User = (props) => {
 
 
 
-ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
+ReactDOM.render(<IndecisionApp options = {['hello', ' itsme']}/>, document.getElementById('app'));
