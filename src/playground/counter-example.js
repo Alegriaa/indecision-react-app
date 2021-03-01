@@ -9,9 +9,30 @@ class Counter extends React.Component {
         this.handleReset = this.handleReset.bind(this);
         // keep track of the all the state changes
         this.state = {
-            count: props.count
+            count: []
         };
         }
+
+    componentDidMount(){
+        const stringCount = localStorage.getItem('count');
+        // converting string to int
+        const count = parseInt(stringCount, 10);
+
+        if(!isNaN(count)){
+            this.setState(() => {
+                count
+            });
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.count !== this.state.count){
+            localStorage.setItem('count', this.state.count)
+
+        }
+
+        console.log('componentupdated');
+    }
     handleAddOne() {
         // to change component state with the setState function
         //prevState to access the old value
@@ -52,10 +73,10 @@ class Counter extends React.Component {
     }
 }
 
-Counter.defaultProps = {
-    count: 0
+// Counter.defaultProps = {
+//     count: 0
 
-};
+// };
 
 
 
