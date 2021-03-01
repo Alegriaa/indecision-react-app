@@ -33,7 +33,7 @@ class IndecisionApp extends React.Component {
         this.handleDeleteOption = this.handleDeleteOption.bind(this);
 
         this.state = {
-            options: props.options
+            options: []
         };
     }
 
@@ -128,10 +128,13 @@ class IndecisionApp extends React.Component {
     }
 }
 
-IndecisionApp.defaultProps = {
-    options: []
 
-};
+// since we are using local storage 
+
+// IndecisionApp.defaultProps = {
+//     options: []
+
+// };
 
 
 const Header = (props) => {
