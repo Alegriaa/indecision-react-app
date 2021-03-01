@@ -36,6 +36,41 @@ class IndecisionApp extends React.Component {
             options: props.options
         };
     }
+
+    // lifecycles in class based components
+    componentDidMount() {
+        // exception handling of input
+        try {
+            const json = localStorage.getItem('options');
+            // parsing json data
+            const options = JSON.parse(json);
+    
+            if(options){
+            this.setState(() => ({ options }));
+            }
+
+        } catch(e){
+            // do nothing
+        }
+        
+    }
+    // allows us to see when the data has changed
+    // when components data change 
+    componentDidUpdate(prevProps, prevState){
+        if (prevState.options.length !== this.state.options.length){
+            const json = JSON.stringify(this.state.options);
+            localStorage.setItem('options', json)
+        console.log('saving data!');
+        }
+    
+    }
+
+    // when a component goes away
+    componentWillUnmount() {
+        console.log("componentWillUnmount")
+    }
+
+
     handleDeleteOptions() {
         this.setState(() => ({ options: [] }));
     }
@@ -184,6 +219,11 @@ class AddOption extends React.Component {
         // state for component
 
         this.setState(() => ({ error }));
+
+        if(!error){
+            // input wiped if input is valid 
+            e.target.elements.option.value = '';
+        }
     }
 
     render(){
@@ -203,6 +243,7 @@ const Options = (props) => {
     return(
         <div>
             <button onClick = {props.handleDeleteOptions}>Remove All</button>
+            {props.options.lnegth === 0  && <p>Please add a option to begin</p>}
             {
                 props.options.map((option) => (
                 <Option 
