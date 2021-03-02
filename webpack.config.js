@@ -6,7 +6,7 @@
 const path = require('path');
 
 module.exports = {
-    // where it should start
+    // where it should start. executed by default
     entry: "./src/app.js",
     output: {
         // join function to connec the absolute path
