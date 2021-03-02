@@ -1,4 +1,4 @@
-export const isAdult = (num) => {
+const isAdult = (num) => {
     if (num >= 18) {
         return true;
     }
@@ -7,10 +7,14 @@ export const isAdult = (num) => {
 };
 
 
-export const canDrink = (num) => {
+const canDrink = (num) => {
     if (num >= 21) {
         return true;
     }
     return false;
 
 };
+
+const isSenior = (num) => num >= 65;
+
+export { isAdult, canDrink, isSenior as default };
