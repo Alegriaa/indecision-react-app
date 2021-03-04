@@ -12,18 +12,47 @@ import User from './User.js';
 // passing data when we init a component, that data is called props
 
 class IndecisionApp extends React.Component {
-    constructor(props){
-        super(props);
-        // binding the handles to this component instance
-        this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-        this.handlePick = this.handlePick.bind(this);
-        this.handleAddOption = this.handleAddOption.bind(this);
-        this.handleDeleteOption = this.handleDeleteOption.bind(this);
+    state = {
+        options: []
+    };
 
-        this.state = {
-            options: []
-        };
-    }
+    handleDeleteOptions = () => {
+        this.setState(() => ({ options: [] }));
+    };
+    // method that is passed down multiple layers 
+    handleDeleteOption = (optionToRemove) => {
+        this.setState((prevState) => ({
+          options: prevState.options.filter((option) => optionToRemove !== option)
+        }));
+      };
+
+    handlePick = () => {
+        const randomNum = Math.floor(Math.random() * this.state.options.length);
+        const option = this.state.options[randomNum];
+        alert(option);
+    };
+
+    handleAddOption = (option) => {
+        // for a empty array
+        if(!option){
+            return 'Please Enter a Valid Value';
+            // indexOf to see if we already have this option in the array
+        } else if (this.state.options.indexOf(option) > -1){
+            return "This option already exists"
+        }
+        this.setState((prevState) => ({ options: prevState.options.concat(option) }));
+    };
+    // Manual Binding Below
+    // constructor(props){
+    //     super(props);
+    //     // binding the handles to this component instance
+    //     this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
+    //     this.handlePick = this.handlePick.bind(this);
+    //     this.handleAddOption = this.handleAddOption.bind(this);
+    //     this.handleDeleteOption = this.handleDeleteOption.bind(this);
+
+    
+    // }
 
     // lifecycles in class based components
     componentDidMount() {
@@ -59,32 +88,7 @@ class IndecisionApp extends React.Component {
     }
 
 
-    handleDeleteOptions() {
-        this.setState(() => ({ options: [] }));
-    }
-    // method that is passed down multiple layers 
-    handleDeleteOption(optionToRemove) {
-        this.setState((prevState) => ({
-          options: prevState.options.filter((option) => optionToRemove !== option)
-        }));
-      }
-
-    handlePick() {
-        const randomNum = Math.floor(Math.random() * this.state.options.length);
-        const option = this.state.options[randomNum];
-        alert(option);
-    }
-
-    handleAddOption(option) {
-        // for a empty array
-        if(!option){
-            return 'Please Enter a Valid Value';
-            // indexOf to see if we already have this option in the array
-        } else if (this.state.options.indexOf(option) > -1){
-            return "This option already exists"
-        }
-        this.setState((prevState) => ({ options: prevState.options.concat(option) }));
-    }
+  
         
     render () {
     
