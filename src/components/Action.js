@@ -1,7 +1,6 @@
 import React from 'react';
 // stateless functional component
-const Action = (props) => {
-    return (
+const Action = (props) => (
         <div>
             <button 
             // calls the prop that we set up above
@@ -13,7 +12,6 @@ const Action = (props) => {
         </div>
 
     );
-};
 
 export default Action;
 
