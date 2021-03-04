@@ -4,6 +4,7 @@ import Options from './Options.js';
 import Header from './Header.js';
 import Action from './Action.js';
 import User from './User.js';
+import OptionModal from './OptionModal'
 
 /// --------------------------------------------------------
 // extend to give us the features from React
@@ -13,11 +14,16 @@ import User from './User.js';
 
 class IndecisionApp extends React.Component {
     state = {
-        options: []
+        options: [],
+        selectedOption: undefined
     };
 
     handleDeleteOptions = () => {
         this.setState(() => ({ options: [] }));
+    };
+
+    handleClearSelectedOption = () => {
+        this.setState(() => ({ selectedOption: undefined}));
     };
     // method that is passed down multiple layers 
     handleDeleteOption = (optionToRemove) => {
@@ -29,7 +35,8 @@ class IndecisionApp extends React.Component {
     handlePick = () => {
         const randomNum = Math.floor(Math.random() * this.state.options.length);
         const option = this.state.options[randomNum];
-        alert(option);
+        // we are overriding a value, no need for prevState here 
+        this.setState(() => ({ selectedOption: option}));
     };
 
     handleAddOption = (option) => {
@@ -112,6 +119,10 @@ class IndecisionApp extends React.Component {
             // pass this props
             handleAddOption={this.handleAddOption}
             
+            />
+            <OptionModal 
+            selectedOption={this.state.selectedOption}
+            handleClearSelectedOption={this.handleClearSelectedOption}
             />
             </div>
         );
