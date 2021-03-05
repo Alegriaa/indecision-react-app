@@ -16,11 +16,19 @@ module.exports = {
     },
     module: {
         rules: [{
-            loader: 'babel-loader',
-            // only run babel if the files meet the criteria below of ending with "js"
-            test: /\.js$/,
-            exclude: /node_modules/
-        }]
+                // npm package
+                loader: 'babel-loader',
+                // only run babel if the files meet the criteria below of ending with "js"
+                test: /\.js$/,
+                exclude: /node_modules/
+            },
+            // rule for having webpack compile down scss to css
+            {
+                test: /\.scss$/,
+                // allows for specifying an array of loaders
+                use: ['style-loader', 'css-loader', 'sass-loader']
+            }
+        ]
     },
     // source
     // tool to give us the location of the errors
