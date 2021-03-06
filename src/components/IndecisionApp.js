@@ -113,17 +113,20 @@ class IndecisionApp extends React.Component {
             // passing function down as a prop
             handlePick = {this.handlePick}
             />
+            <div className="widget">
             <Options 
             options = {this.state.options}
             handleDeleteOptions = {this.handleDeleteOptions}
             handleDeleteOption = {this.handleDeleteOption}
-            
+    
             />
             <AddOption 
-            // pass this props
             handleAddOption={this.handleAddOption}
             
             />
+            </div>
+            
+
             
             </div>
             
