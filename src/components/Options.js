@@ -3,7 +3,10 @@ import React from 'react';
 import Option from './Option.js'
 const Options = (props) => (
         <div>
-            <button onClick = {props.handleDeleteOptions}>Remove All</button>
+            <button 
+            // adding modified button scss here
+            className="button button--link"
+            onClick = {props.handleDeleteOptions}>Remove All</button>
             {props.options.lnegth === 0  && <p>Please add a option to begin</p>}
             {
                 props.options.map((option) => (
