@@ -24,7 +24,8 @@ module.exports = {
             },
             // rule for having webpack compile down scss to css
             {
-                test: /\.scss$/,
+                // ? to support scss and css
+                test: /\.s?css$/,
                 // allows for specifying an array of loaders
                 use: ['style-loader', 'css-loader', 'sass-loader']
             }
