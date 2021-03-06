@@ -2,7 +2,7 @@ import React from 'react';
 // stateless functional component
 const Action = (props) => (
         <div>
-            <button 
+            <button className="big-button"
             // calls the prop that we set up above
                 onClick = {props.handlePick}
                 disabled={!props.hasOptions}

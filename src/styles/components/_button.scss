@@ -1,0 +1,40 @@
+// Big Button
+.big-button {
+    background: $purple;
+    // to get rid of the border
+    border: none;
+    // width , type of border, color
+    // darken(color, percentage) scss function
+    border-bottom: .6rem solid darken($purple, 10%);
+    color: white;
+    font-weight: bold;
+    font-size: $l-size;
+    padding: 2.4rem;
+    // to take the full length of the 62.5%
+    // defined in base.scss body
+    width: 100%;
+}
+
+// using built in disabled pseudo class
+.big-button:disabled {
+    opacity: .5;
+}
+
+// Standard Buttons
+.button {
+    background: $purple;
+    border: none;
+    border-bottom: .3rem solid darken($purple, 10%);
+    color: white;
+    font-weight: 500;
+    padding: $s-size;
+}
+
+//bem naming convention
+//be,modifier
+.button--link {
+    background: none;
+    border: none;
+    color: $off-white;
+    padding: 0;
+}
