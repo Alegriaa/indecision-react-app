@@ -1,0 +1,13 @@
+// rem
+// pixel with better support for accessibility 
+// 1rem converts to 16px
+// 16 pixel base * .625 = 10
+// we can now work on a base 10 system
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1.6rem;
+}
