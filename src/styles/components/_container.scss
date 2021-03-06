@@ -1,0 +1,10 @@
+.container {
+    // take up 60% of the space
+    max-width: 60rem;
+    // margin top /bottom is o, 
+    // distributing the extra space evenly left and right
+    // with auto
+    margin: 0 auto;
+    // so the app does not look like its brown on smaller screens
+    padding: 0 $m-size;
+}

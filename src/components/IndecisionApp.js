@@ -49,7 +49,9 @@ class IndecisionApp extends React.Component {
         }
         this.setState((prevState) => ({ options: prevState.options.concat(option) }));
     };
-    // Manual Binding Below
+
+    // Manual Binding Below:
+
     // constructor(props){
     //     super(props);
     //     // binding the handles to this component instance
@@ -104,6 +106,8 @@ class IndecisionApp extends React.Component {
         return (
             <div>
             <Header subtitle = {subtitle}/>
+            <div className="container">
+
             <Action 
             hasOptions = {this.state.options.length > 0 }
             // passing function down as a prop
@@ -120,6 +124,9 @@ class IndecisionApp extends React.Component {
             handleAddOption={this.handleAddOption}
             
             />
+            
+            </div>
+            
             <OptionModal 
             selectedOption={this.state.selectedOption}
             handleClearSelectedOption={this.handleClearSelectedOption}
